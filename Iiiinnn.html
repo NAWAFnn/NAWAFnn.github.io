@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nawaf Perfumes — نواف للعطور</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c140f;
+    --ink-soft: #3a2c22;
+    --gold: #b6862c;
+    --gold-bright: #d4a445;
+    --cream: #f3ead9;
+    --paper: #ece1cc;
+    --bronze: #7c6142;
+    --wine: #5c2020;
+    --line: rgba(28,20,15,0.16);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece1cc;
+      --ink-soft: #cdbfa3;
+      --cream: #17110c;
+      --paper: #1f1811;
+      --line: rgba(236,225,204,0.14);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece1cc;
+    --ink-soft: #cdbfa3;
+    --cream: #17110c;
+    --paper: #1f1811;
+    --line: rgba(236,225,204,0.14);
+  }
+  body { background: var(--cream); color: var(--ink); }
+
+  h1, h2, h3, .display {
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .navrow {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px; max-width: 1120px; margin: 0 auto;
+  }
+  .brandmark { font-family: 'Amiri', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .brandmark span { color: var(--gold); }
+  .navlinks { display: flex; gap: 32px; font-size: 0.95rem; }
+  .navlinks a { color: var(--ink-soft); text-decoration: none; }
+  .navlinks a:hover { color: var(--gold); }
+  .navlinks { display: none; }
+  @media (min-width: 720px) { .navlinks { display: flex; } }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 92vh; min-height: 92dvh;
+    display: flex; align-items: center;
+    padding: 80px 0 60px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% 20%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 15% 85%, color-mix(in srgb, var(--wine) 18%, transparent), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr; gap: 48px;
+    width: 100%;
+  }
+  @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
+  .eyebrow-line {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em;
+  }
+  .eyebrow-line::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: 1.12;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p.lede {
+    margin-top: 22px; font-size: 1.12rem; line-height: 1.8;
+    color: var(--ink-soft); max-width: 46ch;
+  }
+  .hero-cta { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 2px;
+    font-size: 0.98rem; text-decoration: none;
+    border: 1px solid var(--ink); cursor: pointer;
+    transition: transform 0.25s ease;
+  }
+  .btn-solid { background: var(--ink); color: var(--cream); }
+  .btn-solid:hover { transform: translateY(-2px); }
+  .btn-line { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-line:hover { border-color: var(--ink); }
+
+  /* bottle illustration */
+  .bottle-stage {
+    position: relative; display: flex; justify-content: center; align-items: center;
+    height: 420px;
+  }
+  .bottle-stage svg { width: 260px; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.25)); }
+
+  /* MARQUEE STRIP */
+  .strip {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 16px 0; overflow: hidden; white-space: nowrap;
+    background: var(--paper);
+  }
+  .strip-track { display: inline-flex; gap: 60px; animation: scroll 26s linear infinite; }
+  .strip-track span { font-family: 'Amiri', serif; font-size: 1.05rem; color: var(--bronze); }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .strip-track { animation: none; } }
+
+  /* SECTION HEADERS */
+  .section { padding: 96px 0; }
+  .section-head { max-width: 60ch; margin-bottom: 56px; }
+  .section-head .kicker { color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; display: block; }
+  .section-head h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.3; }
+  .section-head p { margin-top: 16px; color: var(--ink-soft); line-height: 1.8; font-size: 1.05rem; }
+
+  /* STORY */
+  .story { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  @media (min-width: 860px) { .story { grid-template-columns: 0.8fr 1.2fr; } }
+  .story-visual {
+    aspect-ratio: 4/5; border-radius: 2px;
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--gold) 30%, var(--paper)), var(--paper) 70%);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .story-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15), transparent 55%);
+  }
+  .story-text p { line-height: 1.95; color: var(--ink-soft); font-size: 1.06rem; margin: 0 0 20px; }
+  .story-text p:first-child::first-letter {
+    font-family: 'Amiri', serif; font-size: 3.4rem; color: var(--gold);
+    float: right; line-height: 0.8; margin: 8px 0 0 10px;
+  }
+
+  /* SCENTS GRID */
+  .scents-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (min-width: 640px) { .scents-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px) { .scents-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .scent-card {
+    background: var(--cream); padding: 40px 32px;
+    display: flex; flex-direction: column; gap: 18px;
+    transition: background 0.3s ease;
+  }
+  .scent-card:hover { background: var(--paper); }
+  .scent-emblem {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--gold);
+  }
+  .scent-emblem svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; }
+  .scent-card h3 { font-size: 1.4rem; color: var(--ink); }
+  .scent-notes { font-size: 0.88rem; color: var(--bronze); }
+  .scent-card p.desc { color: var(--ink-soft); line-height: 1.8; font-size: 0.98rem; flex-grow: 1; }
+  .scent-price {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--line); padding-top: 16px; margin-top: 4px;
+  }
+  .scent-price .p { font-family: 'Amiri', serif; font-size: 1.15rem; color: var(--gold); }
+  .scent-price a { font-size: 0.9rem; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+
+  /* CRAFT / STEPS */
+  .craft-list { display: grid; grid-template-columns: 1fr; gap: 0; }
+  @media (min-width: 760px) { .craft-list { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+  .craft-item { padding: 28px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 760px) { .craft-item { border-top: none; border-right: 1px solid var(--line); padding: 0 24px 0 0; } }
+  .craft-item:first-child { border: none; padding-right: 0; }
+  .craft-item h4 { font-family: 'Amiri', serif; font-size: 1.15rem; margin-bottom: 12px; color: var(--ink); }
+  .craft-item p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.75; margin: 0; }
+
+  /* NEWSLETTER / CONTACT */
+  .cta-band {
+    background: var(--ink); color: var(--cream);
+    padding: 90px 0; text-align: center;
+  }
+  .cta-band h2 { color: var(--cream); font-size: clamp(1.8rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0 auto 18px; line-height: 1.35; }
+  .cta-band p { color: color-mix(in srgb, var(--cream) 70%, transparent); max-width: 50ch; margin: 0 auto 36px; line-height: 1.8; }
+  .form-row { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .form-row input {
+    flex: 1; min-width: 220px; padding: 15px 18px;
+    background: transparent; border: 1px solid color-mix(in srgb, var(--cream) 40%, transparent);
+    color: var(--cream); border-radius: 2px; font-family: inherit; font-size: 0.98rem;
+  }
+  .form-row input::placeholder { color: color-mix(in srgb, var(--cream) 55%, transparent); }
+  .form-row .btn-solid { background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .form-note { margin-top: 16px; font-size: 0.85rem; color: color-mix(in srgb, var(--cream) 55%, transparent); }
+
+  /* FOOTER */
+  footer { padding: 56px 0 40px; border-top: 1px solid var(--line); }
+  .foot-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 720px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+  footer .brandmark { display: block; margin-bottom: 14px; }
+  footer p.desc { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.8; max-width: 34ch; }
+  .foot-col h5 { font-size: 0.85rem; color: var(--gold); margin: 0 0 14px; }
+  .foot-col a { display: block; color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; margin-bottom: 10px; }
+  .foot-col a:hover { color: var(--ink); }
+  .foot-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navrow">
+    <a href="#top" class="brandmark">نواف<span>.</span> للعطور</a>
+    <div class="navlinks">
+      <a href="#story">حكايتنا</a>
+      <a href="#scents">العطور</a>
+      <a href="#craft">الصناعة</a>
+      <a href="#contact">تواصل</a>
+    </div>
+    <a href="#scents" class="btn btn-line" style="padding:10px 22px; font-size:0.88rem;">تسوّق الآن</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-line">عطور شرقية أصيلة، بروح معاصرة</div>
+      <h1>عبقٌ يُروى،<br>لا <em>يُنسى</em></h1>
+      <p class="lede">نواف للعطور بيت عطور سعودي يمزج بين خامات العود والعنبر الأصيلة وتركيبات عصرية، لنصنع لك توقيعًا عطريًا يبقى في الذاكرة أطول مما يبقى على الجلد.</p>
+      <div class="hero-cta">
+        <a href="#scents" class="btn btn-solid">اكتشف المجموعة</a>
+        <a href="#story" class="btn btn-line">قصة البيت العطري</a>
+      </div>
+    </div>
+    <div class="bottle-stage">
+      <svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#d4a445" stop-opacity="0.9"/>
+            <stop offset="55%" stop-color="#b6862c" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#5c2020" stop-opacity="0.55"/>
+          </linearGradient>
+        </defs>
+        <rect x="70" y="10" width="60" height="34" rx="4" fill="#1c140f"/>
+        <rect x="85" y="0" width="30" height="16" rx="3" fill="#b6862c"/>
+        <path d="M65 44 h70 l14 40 v200 a14 14 0 0 1 -14 14 h-70 a14 14 0 0 1 -14 -14 v-200 z" fill="url(#glass)" stroke="#1c140f" stroke-width="2"/>
+        <path d="M65 44 h70 l14 40 h-98 z" fill="#1c140f" opacity="0.15"/>
+        <rect x="78" y="140" width="44" height="70" rx="2" fill="#f3ead9" opacity="0.85"/>
+        <line x1="86" y1="155" x2="114" y2="155" stroke="#7c6142" stroke-width="1.5"/>
+        <line x1="86" y1="165" x2="110" y2="165" stroke="#7c6142" stroke-width="1.5"/>
+        <line x1="86" y1="175" x2="112" y2="175" stroke="#7c6142" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>عود كمبودي فاخر</span><span>✦</span>
+    <span>عنبر شرقي أصيل</span><span>✦</span>
+    <span>تركيبات حصرية محدودة</span><span>✦</span>
+    <span>تعبئة يدوية</span><span>✦</span>
+    <span>عود كمبودي فاخر</span><span>✦</span>
+    <span>عنبر شرقي أصيل</span><span>✦</span>
+    <span>تركيبات حصرية محدودة</span><span>✦</span>
+    <span>تعبئة يدوية</span><span>✦</span>
+  </div>
+</div>
+
+<section class="section" id="story">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">حكايتنا</span>
+      <h2>بدأت من كوب قهوة وشغف بالعطر</h2>
+    </div>
+    <div class="story">
+      <div class="story-visual"></div>
+      <div class="story-text">
+        <p>بدأ نواف رحلته مع العطور من فضول شخصي في اقتناء واختبار العود والعنبر من مصادر مختلفة، قبل أن يتحول هذا الفضول إلى مشروع حقيقي: بيت عطور صغير يركّز على الجودة قبل الكمية.</p>
+        <p>كل عطر في المجموعة يُطوَّر بالتعاون مع صانعي عطور محليين، ويُختبر على مدى أسابيع قبل أن يصل لمرحلة الإنتاج. لا نطلق عطرًا لمجرد إضافته للكتالوج، بل لأنه يستحق أن يحمل الاسم.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="scents" style="background:var(--paper);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">المجموعة</span>
+      <h2>عطور مختارة لهذا الموسم</h2>
+      <p>أربع تركيبات توقّع، من الصباح الهادئ إلى السهرات الطويلة.</p>
+    </div>
+    <div class="scents-grid">
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>عود ملكي</h3>
+        <div class="scent-notes">عود · صندل · مسك أبيض</div>
+        <p class="desc">تركيبة دافئة وكثيفة، مصممة للحضور القوي في المناسبات المسائية والسهرات الرسمية.</p>
+        <div class="scent-price"><span class="p">٣٩٠ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>عنبر الليل</h3>
+        <div class="scent-notes">عنبر · فانيليا · بخور</div>
+        <p class="desc">عمق شرقي غامض يتكشف تدريجيًا، مثالي لمن يفضّل الأثر العطري الذي يدوم حتى الصباح.</p>
+        <div class="scent-price"><span class="p">٤٢٠ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>ياسمين الفجر</h3>
+        <div class="scent-notes">ياسمين · حمضيات · مسك</div>
+        <p class="desc">إطلالة نهارية منعشة بلمسة زهرية خفيفة، مناسبة للعمل واللقاءات الصباحية.</p>
+        <div class="scent-price"><span class="p">٣٦٠ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>خزامى الديرة</h3>
+        <div class="scent-notes">خزامى · جلد · قرنفل</div>
+        <p class="desc">مزيج جريء يجمع بين الحداثة والخامات التقليدية، لمن يبحث عن هوية عطرية مختلفة.</p>
+        <div class="scent-price"><span class="p">٤٠٥ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>مسك الحرملك</h3>
+        <div class="scent-notes">مسك · ورد بلغاري · صندل</div>
+        <p class="desc">نعومة أنثوية كلاسيكية بتركيبة مسك فاتح، أثرها خفيف وقريب من الجسم.</p>
+        <div class="scent-price"><span class="p">٣٧٥ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+      <div class="scent-card">
+        <div class="scent-emblem"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l2 4v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8z"/></svg></div>
+        <h3>هيل وقرفة</h3>
+        <div class="scent-notes">هيل · قرفة · عود خفيف</div>
+        <p class="desc">تحية للمجلس السعودي التقليدي، توابل دافئة تمتزج بلمسة عود ناعمة.</p>
+        <div class="scent-price"><span class="p">٣٩٥ ر.س</span><a href="#contact">اطلب الآن</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="craft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">كيف نصنع عطورنا</span>
+      <h2>من الفكرة إلى الزجاجة</h2>
+    </div>
+    <div class="craft-list">
+      <div class="craft-item">
+        <h4>اختيار الخامات</h4>
+        <p>نستورد العود والعنبر من مصادر موثوقة، ونختبر كل دفعة قبل اعتمادها في التركيبة.</p>
+      </div>
+      <div class="craft-item">
+        <h4>التطوير</h4>
+        <p>نعمل مع صانعي عطور محليين لتطوير التركيبة على مدى أسابيع، بعدة نسخ تجريبية.</p>
+      </div>
+      <div class="craft-item">
+        <h4>الاختبار</h4>
+        <p>يُختبر كل عطر على الجلد لفترات مختلفة، لضمان ثبات الرائحة طوال اليوم.</p>
+      </div>
+      <div class="craft-item">
+        <h4>التعبئة</h4>
+        <p>تُعبأ كل زجاجة يدويًا وتُختم برقم دفعة الإنتاج، ضمانًا للجودة والتتبع.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2>كن أول من يعلم عند إطلاق عطر جديد</h2>
+    <p>ننشر عطرًا محدودًا كل موسم، بكميات قليلة. اشترك ليصلك إشعار قبل نفاد الكمية.</p>
+    <div class="form-row">
+      <input type="email" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني">
+      <button class="btn btn-solid" type="button">اشتراك</button>
+    </div>
+    <p class="form-note">هذا نموذج تجريبي — يحتاج ربطًا بخدمة بريد فعلية ليعمل الإرسال.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brandmark">نواف<span>.</span> للعطور</a>
+        <p class="desc">بيت عطور سعودي يصنع تركيبات محدودة من العود والعنبر، بلمسة معاصرة.</p>
+      </div>
+      <div class="foot-col">
+        <h5>روابط</h5>
+        <a href="#story">حكايتنا</a>
+        <a href="#scents">العطور</a>
+        <a href="#craft">الصناعة</a>
+      </div>
+      <div class="foot-col">
+        <h5>تواصل</h5>
+        <a href="#contact">راسلنا</a>
+        <a href="#contact">تابعنا على إنستغرام</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 نواف للعطور</span>
+      <span>صُنع بحب في المملكة العربية السعودية</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
